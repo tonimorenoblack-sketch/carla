@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Carli 💛</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 30px 20px 60px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      text-align: center;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #6b4f00;
+      background: linear-gradient(135deg, #fff7d6, #ffe082 45%, #ffca28);
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: min(95vw, 560px);
+    }
+
+    .titulo {
+      margin-bottom: 10px;
+      font-size: clamp(1.7rem, 7vw, 3rem);
+      font-weight: 800;
+      opacity: 0;
+    }
+
+    .subtitulo {
+      margin-bottom: 20px;
+      color: #8a6d1a;
+      font-size: 1rem;
+      opacity: 0;
+    }
+
+    .flor {
+      position: relative;
+      width: 220px;
+      height: 260px;
+      margin: 0 auto 25px;
+      opacity: 0;
+    }
+
+    .tallo {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 8px;
+      height: 150px;
+      border-radius: 8px;
+      background: linear-gradient(#66bb6a, #2e7d32);
+      transform: translateX(-50%);
+    }
+
+    .hoja {
+      position: absolute;
+      bottom: 46px;
+      width: 58px;
+      height: 24px;
+      border-radius: 100% 0 100% 0;
+      background: linear-gradient(#66bb6a, #2e7d32);
+    }
+
+    .hoja.izq {
+      left: 52px;
+      transform: rotate(-25deg);
+    }
+
+    .hoja.der {
+      right: 52px;
+      transform: scaleX(-1) rotate(-25deg);
+    }
+
+    .cabeza {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 155px;
+      height: 155px;
+      transform: translateX(-50%);
+      filter: drop-shadow(0 8px 8px rgba(154, 111, 0, .2));
+    }
+
+    .petalo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 68px;
+      height: 38px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 30% 30%,
+        #fffde7,
+        #ffeb3b 55%,
+        #fbc02d 100%
+      );
+      box-shadow: 0 0 8px rgba(180, 140, 0, .2);
+      transform-origin: 0 50%;
+    }
+
+    .petalo:nth-child(1) {
+      transform: rotate(0deg) translateY(-52%);
+    }
+
+    .petalo:nth-child(2) {
+      transform: rotate(45deg) translateY(-52%);
+    }
+
+    .petalo:nth-child(3) {
+      transform: rotate(90deg) translateY(-52%);
+    }
+
+    .petalo:nth-child(4) {
+      transform: rotate(135deg) translateY(-52%);
+    }
+
+    .petalo:nth-child(5) {
+      transform: rotate(180deg) translateY(-52%);
+    }
+
+    .petalo:nth-child(6) {
+      transform: rotate(225deg) translateY(-52%);
+    }
+
+    .petalo:nth-child(7) {
+      transform: rotate(270deg) translateY(-52%);
+    }
+
+    .petalo:nth-child(8) {
+      transform: rotate(315deg) translateY(-52%);
+    }
+
+    .centro {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffb300, #e65100);
+      box-shadow:
+        inset 0 0 10px rgba(0, 0, 0, .25),
+        0 0 0 5px rgba(255, 193, 7, .35);
+      transform: translate(-50%, -50%);
+    }
+
+    .boton {
+      border: none;
+      border-radius: 999px;
+      padding: 15px 28px;
+      color: white;
+      background: linear-gradient(135deg, #f9a825, #ef6c00);
+      box-shadow: 0 7px 18px rgba(180, 100, 0, .35);
+      cursor: pointer;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: transform .2s ease, box-shadow .2s ease;
+      animation: latido 1.7s ease-in-out infinite;
+    }
+
+    .boton:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(180, 100, 0, .5);
+    }
+
+    .boton:active {
+      transform: scale(.96);
+    }
+
+    .mensaje {
+      display: none;
+      margin-top: 25px;
+      padding: 24px 20px;
+      border: 1px solid rgba(255, 255, 255, .7);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .58);
+      box-shadow: 0 10px 30px rgba(120, 90, 0, .2);
+      backdrop-filter: blur(8px);
+    }
+
+    .mensaje p {
+      margin-bottom: 14px;
+      color: #5c4300;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .mensaje p:last-child {
+      margin-bottom: 0;
+    }
+
+    .firma {
+      margin-top: 18px;
+      color: #4a3600 !important;
+      font-weight: bold;
+    }
+
+    .flotante {
+      position: fixed;
+      top: -35px;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    /*
+      ANIMACIONES ACTIVADAS DESPUÉS DE PULSAR EL BOTÓN
+    */
+
+    body.animado .titulo {
+      animation: aparecer .9s ease forwards;
+    }
+
+    body.animado .subtitulo {
+      animation: aparecer 1.2s ease .15s forwards;
+    }
+
+    body.animado .flor {
+      animation:
+        aparecer 1s ease .25s forwards,
+        balanceo 4s ease-in-out 1.2s infinite;
+    }
+
+    body.animado .mensaje {
+      display: block;
+      animation: mensajeAparece 1s ease forwards;
+    }
+
+    body.animado .flotante {
+      animation: caer linear infinite;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes mensajeAparece {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(.94);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes balanceo {
+      0%, 100% {
+        transform: rotate(-3deg);
+      }
+
+      50% {
+        transform: rotate(3deg);
+      }
+    }
+
+    @keyframes latido {
+      0%, 100% {
+        box-shadow: 0 7px 18px rgba(180, 100, 0, .35);
+      }
+
+      50% {
+        box-shadow: 0 7px 28px rgba(239, 108, 0, .65);
+      }
+    }
+
+    @keyframes caer {
+      0% {
+        opacity: 0;
+        transform: translateY(-40px) rotate(0deg);
+      }
+
+      10% {
+        opacity: .85;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    @media (max-width: 420px) {
+      body {
+        padding: 20px 15px 50px;
+      }
+
+      .flor {
+        transform: scale(.88);
+        margin-top: -5px;
+        margin-bottom: 0;
+      }
+
+      .mensaje {
+        padding: 22px 17px;
+      }
+
+      .mensaje p {
+        font-size: .98rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1 class="titulo">Para mi princesa 💛</h1>
+
+    <p class="subtitulo">
+      21 de septiembre · Día de las flores amarillas
+    </p>
+
+    <div class="flor" aria-label="Flor amarilla animada">
+      <div class="tallo"></div>
+      <div class="hoja izq"></div>
+      <div class="hoja der"></div>
+
+      <div class="cabeza">
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="centro"></div>
+      </div>
+    </div>
+
+    <button class="boton" id="boton">
+      Pulsa para abrir tu sorpresa ✨
+    </button>
+
+    <section class="mensaje" id="mensaje">
+      <p>
+        Sé que hoy es el día en que se regalan flores amarillas, y aunque
+        la distancia no me deja dártela en tus manos, quise encontrar la
+        forma de que igualmente llegara hasta ti.
+      </p>
+
+      <p>
+        Esta flor lleva mi cariño, la ilusión de verte pronto y las ganas
+        de seguir construyendo cosas bonitas juntos, aunque sea desde lejos.
+      </p>
+
+      <p>
+        Que el amarillo de hoy te recuerde lo mucho que pienso en ti
+        y lo importante que eres para mí.
+      </p>
+
+      <p class="firma">
+        Te amo, Carli 💛
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const boton = document.getElementById("boton");
+    const emojis = ["💛", "🌼", "🌻", "✨", "💕"];
+
+    boton.addEventListener("click", function () {
+      document.body.classList.add("animado");
+
+      boton.textContent = "Te amo, Carli 💛";
+      boton.disabled = true;
+      boton.style.animation = "none";
+
+      for (let i = 0; i < 25; i++) {
+        const elemento = document.createElement("div");
+
+        elemento.className = "flotante";
+        elemento.textContent =
+          emojis[Math.floor(Math.random() * emojis.length)];
+
+        elemento.style.left = Math.random() * 100 + "vw";
+        elemento.style.fontSize = 16 + Math.random() * 16 + "px";
+        elemento.style.animationDuration = 5 + Math.random() * 7 + "s";
+        elemento.style.animationDelay = Math.random() * 3 + "s";
+
+        document.body.appendChild(elemento);
+      }
+
+      setTimeout(function () {
+        document.getElementById("mensaje").scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }, 700);
+    });
+  </script>
+</body>
+</html>
